@@ -1,8 +1,11 @@
+import { BrowserRouter as Router } from "react-router-dom";
 import General from './components/General/General';
 
 function App() {
   return (
-    <General />
+    <Router>
+      <General />
+    </Router>
   )
 }
 

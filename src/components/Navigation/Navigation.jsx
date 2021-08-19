@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -44,9 +45,11 @@ export default function Navbar() {
               </div>
 
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button className="text-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white block px-3 mr-8 py-2 rounded-md text-base font-medium bg-blue-100">
-                  Add User
-                </button>
+                <Link to="/add/user">
+                  <button className="text-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white block px-3 mr-8 py-2 rounded-md text-base font-medium bg-blue-100">
+                    Add User
+                  </button>
+                </Link>
                 <button
                   type="button"
                   className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
