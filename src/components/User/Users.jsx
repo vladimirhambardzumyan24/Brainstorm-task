@@ -1,16 +1,40 @@
 import { useEffect, useState } from "react";
 import getUser from "../../data/users.data";
+import Pagination from "../Pagination/Pagination";
 
-export default function Users() 
-{
+export default function Users() {
   const [data, setData] = useState([]);
+  const [usersCount, setUsersCount] = useState(0);
+  const [pageCount, setPageCount] = useState("");
+  const [thisPage, setThisPage] = useState(1);
+  const limit = 10;
 
   useEffect(() => {
-    getUser().then((res) => {
-      console.log(res);
+    getUser(thisPage, limit).then((res) => {
       setData(res.data);
+      setUsersCount(res.headers["x-total-count"]);
     });
-  }, []);
+  }, [thisPage]);
+
+  useEffect(() => {
+    setPageCount(Math.ceil(usersCount / limit));
+  }, [usersCount]);
+
+  const handleGivPage = (page) => {
+    setThisPage(page);
+  };
+
+  const handleGivPrevPage = () => {
+    if (thisPage > 1) {
+      setThisPage(thisPage - 1);
+    }
+  };
+
+  const handleGivNextPage = () => {
+    if (thisPage < pageCount) {
+      setThisPage(thisPage + 1);
+    }
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -107,6 +131,14 @@ export default function Users()
                 ))}
               </tbody>
             </table>
+            <div className="flex justify-center">
+              <Pagination
+                pageCount={pageCount}
+                givThisPage={handleGivPage}
+                givPrevPage={handleGivPrevPage}
+                givNextPage={handleGivNextPage}
+              />
+            </div>
           </div>
         </div>
       </div>

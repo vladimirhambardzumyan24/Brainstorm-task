@@ -1,9 +1,9 @@
 import axios from "axios";
 
-const getUser = async function () {
+const getUser = async function (thisPage,limit) {
     try {
         const response = await axios.get(
-            "https://brainstorm-interview-task.herokuapp.com/users?_page=1&_limit=10"
+            `https://brainstorm-interview-task.herokuapp.com/users?_page=${thisPage}&_limit=${limit}`
         );
         return response;
     } catch (error) {
