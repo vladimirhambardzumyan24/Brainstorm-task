@@ -1,14 +1,15 @@
 export default function Pagination({
-  pageCount,
+  pageArray,
   givThisPage,
   givPrevPage,
   givNextPage,
 }) {
-  let pageArray = [];
+  // console.log(`pageCount`, pageCount)
+  //   let pageArray = [];
 
-  for (let i = 1; i <= pageCount; i++) {
-    pageArray = [...pageArray, i];
-  }
+  //   for (let i = 1; i <= pageCount; i++) {
+  //     pageArray = [...pageArray, i];
+  //   }
 
   return (
     <nav aria-label="Page navigation">
