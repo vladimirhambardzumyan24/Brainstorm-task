@@ -4,13 +4,6 @@ export default function Pagination({
   givPrevPage,
   givNextPage,
 }) {
-  // console.log(`pageCount`, pageCount)
-  //   let pageArray = [];
-
-  //   for (let i = 1; i <= pageCount; i++) {
-  //     pageArray = [...pageArray, i];
-  //   }
-
   return (
     <nav aria-label="Page navigation">
       <ul className="inline-flex space-x-2">

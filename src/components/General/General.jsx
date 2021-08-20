@@ -1,24 +1,17 @@
-import { useState } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
-import AddUser from "../AddUser/AddUser";
-import EditUser from "../EditUser/EditUser";
+import { Route, Switch } from "react-router-dom";
 import Users from "../User/Users";
+import EditUser from "../EditUser/EditUser";
+import AddUser from "../AddUser/AddUser";
 
 export default function General() {
-  const [userId, setUserId] = useState(0);
-  let history = useHistory();
 
-  const editThisUser = (id) => {
-    history.push(`/user/${id}`);
-    setUserId(id);
-  };
   return (
     <Switch>
       <Route exact path="/">
-        <Users editThisUser={editThisUser} />
+        <Users  />
       </Route>
-      <Route exact path="/user/:id">
-        <EditUser userId={userId} />
+      <Route exact path="/user/:id/edit">
+        <EditUser />
       </Route>
       <Route exact path="/add/user">
         <AddUser />

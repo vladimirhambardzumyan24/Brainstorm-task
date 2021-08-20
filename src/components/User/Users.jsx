@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import Navbar from "../Navigation/Navigation";
 import getUser from "../../data/users.data";
 import Pagination from "../Pagination/Pagination";
-import Navbar from "../Navigation/Navigation";
+import UsersInterface from "../UsersInterface/UsersInterface";
+import "./User.css";
 
-export default function Users({ editThisUser }) {
+export default function Users() {
   const [data, setData] = useState([]);
   const [usersCount, setUsersCount] = useState(0);
   const [pageArray, setPageArray] = useState([1, 2]);
@@ -45,7 +47,6 @@ export default function Users({ editThisUser }) {
   };
 
   const handleGivNextPage = () => {
-    console.log(`thisPage`, thisPage);
     if (thisPage < pageCount) {
       setThisPage(thisPage + 1);
     }
@@ -59,111 +60,73 @@ export default function Users({ editThisUser }) {
   return (
     <>
       <Navbar />
-      <div className="overflow-x-auto">
-        <div className=" min-h-screen   flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
-          <div className="w-full lg:w-5/6">
-            <div className="shadow  overflow-x-auto border-b border-gray-200 sm:rounded-lg">
-              <table className="min-w-max  w-full table-auto">
-                <thead className="bg-gray-50">
-                  <tr className="pl-10">
-                    <th
-                      scope="col"
-                      className="pl-10 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="pl-12 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
-                    >
-                      Location
-                    </th>
-                    <th
-                      scope="col"
-                      className="pl-24 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
-                    >
-                      Registered date
-                    </th>
-                    <th
-                      scope="col"
-                      className="pl-12 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
-                    >
-                      LAst active date
-                    </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
-                    </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {data.map((user) => (
-                    <tr key={user.id}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10">
-                            <img
-                              className="h-10 w-10 rounded-full"
-                              src={user.photo}
-                              alt=""
-                            />
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {user.name}
-                            </div>
-                            <div className="text-sm text-gray-500">
-                              {user.email}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-12 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {user.location}
-                        </div>
-                      </td>
-                      <td className="px-12 py-4 whitespace-nowrap">
-                        <span className="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {user.registeredDate}
-                        </span>
-                      </td>
-                      <td className="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {user.lastActiveDate}
-                      </td>
-                      <td className="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button
-                          onClick={() => {
-                            editThisUser(user.id);
-                          }}
-                          className="text-gray-700 cursor-pointer hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium bg-blue-100"
-                        >
-                          Edit
-                        </button>
-                      </td>
-                      <td className="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <button className="text-gray-700 cursor-pointer hover:bg-red-400 hover:text-white block px-3 py-2 rounded-md text-base font-medium bg-red-100">
-                          Delete
-                        </button>
-                      </td>
+      {data.length === 0 ? (
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
+          <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+          <h2 className="text-center text-white text-xl font-semibold">
+            Loading...
+          </h2>
+          <p className="w-1/3 text-center text-white">
+            This may take a few seconds, please don't close this page.
+          </p>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
+          <div className=" min-h-screen   flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+            <div className="w-full lg:w-5/6">
+              <div className="shadow  overflow-x-auto border-b border-gray-200 sm:rounded-lg">
+                <table className="min-w-max  w-full table-auto">
+                  <thead className="bg-gray-50">
+                    <tr className="pl-10">
+                      <th
+                        scope="col"
+                        className="pl-10 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="pl-12 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                      >
+                        Location
+                      </th>
+                      <th
+                        scope="col"
+                        className="pl-24 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                      >
+                        Registered date
+                      </th>
+                      <th
+                        scope="col"
+                        className="pl-12 px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider"
+                      >
+                        LAst active date
+                      </th>
+                      <th scope="col" className="relative px-6 py-3">
+                        <span className="sr-only">Edit</span>
+                      </th>
+                      <th scope="col" className="relative px-6 py-3">
+                        <span className="sr-only">Edit</span>
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="flex justify-center">
-                <Pagination
-                  pageArray={pageArray}
-                  givThisPage={handleGivPage}
-                  givPrevPage={handleGivPrevPage}
-                  givNextPage={handleGivNextPage}
-                />
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-200">
+                    <UsersInterface data={data}/>
+                  </tbody>
+                </table>
+                <div className="flex justify-center">
+                  <Pagination
+                    pageArray={pageArray}
+                    givThisPage={handleGivPage}
+                    givPrevPage={handleGivPrevPage}
+                    givNextPage={handleGivNextPage}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
