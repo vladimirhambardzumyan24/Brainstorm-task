@@ -1,4 +1,5 @@
 export default function Pagination({
+  currentPage,
   pageArray,
   givThisPage,
   givPrevPage,
@@ -28,7 +29,9 @@ export default function Pagination({
                 onClick={() => {
                   givThisPage(item);
                 }}
-                className="w-10 h-10 text-indigo-200 transition-colors duration-150 rounded-full bg-indigo-500 focus:shadow-outline hover:bg-indigo-900"
+                className={`w-10 h-10 text-indigo-200 transition-colors duration-150 rounded-full focus:shadow-outline hover:bg-indigo-900 ${
+                  currentPage === item ? "bg-indigo-700" : "bg-indigo-500"
+                }`}
               >
                 {item}
               </button>

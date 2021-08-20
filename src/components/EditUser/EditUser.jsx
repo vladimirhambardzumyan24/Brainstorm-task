@@ -5,7 +5,7 @@ import Navbar from "../Navigation/Navigation";
 import { httpClient } from "../../service/axios.service";
 import { uploadImage } from "../../helper/uploadImage.helper";
 import { validationSchema } from "../../helper/validationSchema";
-import getThisUser from "../../data/this.user.data";
+import { getUserById } from "../../service/user.service";
 import "../User/User.css";
 
 export default function EditUser() {
@@ -14,7 +14,7 @@ export default function EditUser() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getThisUser(id).then((res) => {
+    getUserById(id).then((res) => {
       setUserData(res.data);
       setIsLoading(false);
     });

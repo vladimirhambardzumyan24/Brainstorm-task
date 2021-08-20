@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { getUsers } from "../../service/user.service";
 import Navbar from "../Navigation/Navigation";
-import getUser from "../../data/users.data";
 import Pagination from "../Pagination/Pagination";
 import UsersInterface from "../UsersInterface/UsersInterface";
 import "./User.css";
@@ -8,13 +8,13 @@ import "./User.css";
 export default function Users() {
   const [data, setData] = useState([]);
   const [usersCount, setUsersCount] = useState(0);
-  const [pageArray, setPageArray] = useState([1, 2]);
+  const [pageArray, setPageArray] = useState([1, 2, 3]);
   const [pageCount, setPageCount] = useState(0);
   const [thisPage, setThisPage] = useState(1);
   const limit = 10;
 
   useEffect(() => {
-    getUser(thisPage, limit).then((res) => {
+    getUsers(thisPage, limit).then((res) => {
       setData(res.data);
       setUsersCount(res.headers["x-total-count"]);
     });
@@ -25,37 +25,20 @@ export default function Users() {
   }, [usersCount]);
 
   const handleGivPage = (page) => {
-    setThisPage(page);
     if (page === 1) {
+      setThisPage(page);
       setPageArray([page, page + 1]);
     } else if (page === pageCount) {
+      setThisPage(page);
       setPageArray([page - 1, page]);
     } else if (page - 1 >= 1 && page + 1 <= pageCount) {
+      setThisPage(page);
       setPageArray([page - 1, page, page + 1]);
     }
   };
 
-  const handleGivPrevPage = () => {
-    if (thisPage > 1) {
-      setThisPage(thisPage - 1);
-    }
-    if (thisPage === 1) {
-      setPageArray([thisPage, thisPage + 1]);
-    } else if (thisPage - 1 > 1) {
-      setPageArray([thisPage - 1, thisPage, thisPage + 1]);
-    }
-  };
-
-  const handleGivNextPage = () => {
-    if (thisPage < pageCount) {
-      setThisPage(thisPage + 1);
-    }
-    if (thisPage === pageCount) {
-      setPageArray([thisPage - 1, thisPage]);
-    } else if (thisPage + 1 <= pageCount) {
-      setPageArray([thisPage - 1, thisPage, thisPage + 1]);
-    }
-  };
+  const handleGivPrevPage = () => handleGivPage(thisPage - 1);
+  const handleGivNextPage = () => handleGivPage(thisPage + 1);
 
   return (
     <>
@@ -111,11 +94,12 @@ export default function Users() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    <UsersInterface data={data}/>
+                    <UsersInterface data={data} />
                   </tbody>
                 </table>
                 <div className="flex justify-center">
                   <Pagination
+                    currentPage={thisPage}
                     pageArray={pageArray}
                     givThisPage={handleGivPage}
                     givPrevPage={handleGivPrevPage}
