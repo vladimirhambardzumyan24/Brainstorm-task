@@ -6,7 +6,7 @@ import Navbar from "../Navigation/Navigation";
 export default function Users({ editThisUser }) {
   const [data, setData] = useState([]);
   const [usersCount, setUsersCount] = useState(0);
-  const [pageArray, setPageArray] = useState([1, 2, 3]);
+  const [pageArray, setPageArray] = useState([1, 2]);
   const [pageCount, setPageCount] = useState(0);
   const [thisPage, setThisPage] = useState(1);
   const limit = 10;
@@ -45,6 +45,7 @@ export default function Users({ editThisUser }) {
   };
 
   const handleGivNextPage = () => {
+    console.log(`thisPage`, thisPage);
     if (thisPage < pageCount) {
       setThisPage(thisPage + 1);
     }
