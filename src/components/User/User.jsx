@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { httpClient } from "../../service/axios.service";
+import EmailIcon from "../../email.svg"
 
 export default function User({ user, onDelete }) {
   const history = useHistory();
@@ -41,7 +42,13 @@ export default function User({ user, onDelete }) {
       <td className="px-12 py-4 whitespace-nowrap text-sm text-gray-500">
         {user.lastActiveDate}
       </td>
-      <td className="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <img
+          src={EmailIcon}
+          alt=""
+        />
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button
           onClick={() => {
             editThisUser(user.id);
@@ -51,7 +58,7 @@ export default function User({ user, onDelete }) {
           Edit
         </button>
       </td>
-      <td className="px-12 py-4 whitespace-nowrap text-right text-sm font-medium">
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button
           onClick={() => {
             deleteThisUser(user.id);
@@ -60,7 +67,13 @@ export default function User({ user, onDelete }) {
         >
           Delete
         </button>
-        {loading && "loading"}
+      </td>
+      <td>
+        {loading && (
+          <div class=" flex justify-center items-center">
+            <div class="animate-spin rounded-full h-8 w-8 mr-4 border-t-2 border-b-2 border-red-500"></div>
+          </div>
+        )}
       </td>
     </tr>
   );

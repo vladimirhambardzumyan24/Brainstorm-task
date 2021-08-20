@@ -30,7 +30,7 @@ export default function Pagination({
                   givThisPage(item);
                 }}
                 className={`w-10 h-10 text-indigo-200 transition-colors duration-150 rounded-full focus:shadow-outline hover:bg-indigo-900 ${
-                  currentPage === item ? "bg-indigo-700" : "bg-indigo-500"
+                  currentPage === item ? "bg-indigo-900" : "bg-indigo-500"
                 }`}
               >
                 {item}

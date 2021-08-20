@@ -6,7 +6,6 @@ import { httpClient } from "../../service/axios.service";
 import { uploadImage } from "../../helper/uploadImage.helper";
 import { validationSchema } from "../../helper/validationSchema";
 import { getUserById } from "../../service/user.service";
-import "../Users/User.css";
 
 export default function EditUser() {
   const { id } = useParams();
@@ -49,8 +48,11 @@ export default function EditUser() {
     <>
       <Navbar />
       {isLoading ? (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
-          <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-500 opacity-75 flex flex-col items-center justify-center">
+          <div class=" flex justify-center items-center">
+            <div class="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-purple-500"></div>
+          </div>
+          <br></br>
           <h2 className="text-center text-white text-xl font-semibold">
             Loading...
           </h2>
