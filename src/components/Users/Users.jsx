@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getUsers } from "../../service/user.service";
 import Navbar from "../Navigation/Navigation";
 import Pagination from "../Pagination/Pagination";
-import UsersInterface from "../UsersInterface/UsersInterface";
+import User from "../User/User";
 import "./User.css";
 
 export default function Users() {
@@ -13,12 +13,16 @@ export default function Users() {
   const [thisPage, setThisPage] = useState(1);
   const limit = 10;
 
-  useEffect(() => {
+  const getUsersCallback = useCallback(() => {
     getUsers(thisPage, limit).then((res) => {
       setData(res.data);
       setUsersCount(res.headers["x-total-count"]);
     });
   }, [thisPage]);
+
+  useEffect(() => {
+    getUsersCallback();
+  }, [getUsersCallback]);
 
   useEffect(() => {
     setPageCount(Math.ceil(usersCount / limit));
@@ -94,7 +98,13 @@ export default function Users() {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    <UsersInterface data={data} />
+                    {data.map((user) => (
+                      <User
+                        user={user}
+                        key={user.id}
+                        onDelete={async () => await getUsersCallback()}
+                      />
+                    ))}
                   </tbody>
                 </table>
                 <div className="flex justify-center">

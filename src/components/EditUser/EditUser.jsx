@@ -6,7 +6,7 @@ import { httpClient } from "../../service/axios.service";
 import { uploadImage } from "../../helper/uploadImage.helper";
 import { validationSchema } from "../../helper/validationSchema";
 import { getUserById } from "../../service/user.service";
-import "../User/User.css";
+import "../Users/User.css";
 
 export default function EditUser() {
   const { id } = useParams();
