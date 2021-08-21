@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import Navbar from "../Navigation/Navigation";
@@ -11,6 +11,7 @@ export default function EditUser() {
   const { id } = useParams();
   const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     getUserById(id).then((res) => {
@@ -26,6 +27,7 @@ export default function EditUser() {
       photo: userData.photo,
       location: userData.location,
     },
+
     enableReinitialize: true,
 
     validationSchema: validationSchema(),
@@ -38,9 +40,8 @@ export default function EditUser() {
         lastActiveDate: new Date().toLocaleString(),
         disabled: false,
       };
-      console.log(`values`, newUserValue);
-      const res = await httpClient.put(`/users/${id}`, newUserValue);
-      console.log("res", res);
+      await httpClient.put(`/users/${id}`, newUserValue);
+      history.push("/");
     },
   });
 

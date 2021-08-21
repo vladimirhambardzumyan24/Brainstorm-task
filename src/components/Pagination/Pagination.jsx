@@ -11,7 +11,7 @@ export default function Pagination({
         <li>
           <button
             onClick={givPrevPage}
-            className="flex items-center justify-center w-10 h-10 text-indigo-100 transition-colors bg-indigo-400 duration-150 rounded-full focus:shadow-outline hover:bg-indigo-700"
+            className="flex items-center justify-center w-10 h-10 text-indigo-100 transition-colors bg-gray-400 duration-150 rounded-full focus:shadow-outline hover:bg-gray-700"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
               <path
@@ -29,8 +29,8 @@ export default function Pagination({
                 onClick={() => {
                   givThisPage(item);
                 }}
-                className={`w-10 h-10 text-indigo-200 transition-colors duration-150 rounded-full focus:shadow-outline hover:bg-indigo-900 ${
-                  currentPage === item ? "bg-indigo-900" : "bg-indigo-500"
+                className={`w-10 h-10 text-indigo-200 transition-colors duration-150 rounded-full focus:shadow-outline hover:bg-gray-700 ${
+                  currentPage === item ? "bg-gray-800" : "bg-gray-500"
                 }`}
               >
                 {item}
@@ -41,7 +41,7 @@ export default function Pagination({
         <li>
           <button
             onClick={givNextPage}
-            className="flex items-center justify-center w-10 h-10 text-indigo-100 transition-colors bg-indigo-400 duration-150  rounded-full focus:shadow-outline hover:bg-indigo-700"
+            className="flex items-center justify-center w-10 h-10 text-indigo-100 transition-colors bg-gray-400 duration-150  rounded-full focus:shadow-outline hover:bg-gray-700"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
               <path

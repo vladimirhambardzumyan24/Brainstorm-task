@@ -23,12 +23,14 @@ export default function AddUser() {
         lastActiveDate: new Date().toLocaleString(),
         disabled: false,
       };
-      console.log(`values`, newUserValue);
-      const res = await httpClient.post("/users", newUserValue);
-      console.log("res", res);
+      await httpClient.post("/users", newUserValue);
+      values.name = "";
+      values.email = "";
+      values.photo = null;
+      values.location = "";
     },
   });
-  
+
   return (
     <>
       <Navbar />
@@ -132,12 +134,11 @@ export default function AddUser() {
                 className="px-8  w-full border rounded py-2 text-gray-700 focus:outline-none border-gray-300"
               />
             </div>
-            {formik.touched.location &&
-              formik.errors.location &&(
-                <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                  {formik.errors.location}
-                </span>
-              )}
+            {formik.touched.location && formik.errors.location && (
+              <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                {formik.errors.location}
+              </span>
+            )}
           </div>
 
           <button

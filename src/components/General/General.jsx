@@ -4,11 +4,10 @@ import EditUser from "../EditUser/EditUser";
 import AddUser from "../AddUser/AddUser";
 
 export default function General() {
-
   return (
     <Switch>
       <Route exact path="/">
-        <Users  />
+        <Users />
       </Route>
       <Route exact path="/user/:id/edit">
         <EditUser />
